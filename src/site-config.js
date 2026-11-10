@@ -29,19 +29,36 @@ window.BRANDXPLODA_CONFIG = {
 
 const previewStyles = document.createElement('style');
 previewStyles.textContent = `
-  #portfolioGrid iframe,
-  #portfolioGrid .preview,
-  #portfolioGrid .preview-frame {
+  #portfolioGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-content: center;
+    width: 100%;
+  }
+  #portfolioGrid > .portfolio-card {
+    width: 100%;
+    min-width: 0;
+  }
+  #portfolioGrid .preview {
+    width: 100%;
     overflow: hidden !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
   }
-  #portfolioGrid iframe::-webkit-scrollbar,
+  #portfolioGrid .preview iframe {
+    left: 50%;
+    transform: translateX(-50%) scale(.25);
+    transform-origin: top center;
+    overflow: hidden !important;
+    border: 0;
+  }
   #portfolioGrid .preview::-webkit-scrollbar,
-  #portfolioGrid .preview-frame::-webkit-scrollbar {
+  #portfolioGrid .preview iframe::-webkit-scrollbar {
     width: 0 !important;
     height: 0 !important;
     display: none !important;
+  }
+  @media (max-width: 760px) {
+    #portfolioGrid { grid-template-columns: 1fr; }
   }
 `;
 document.head.appendChild(previewStyles);
@@ -56,5 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
     frame.setAttribute('scrolling', 'no');
     frame.style.overflow = 'hidden';
     frame.style.border = '0';
+  });
+
+  document.querySelectorAll('#process .section-heading p').forEach(paragraph => {
+    if (paragraph.textContent.trim() === 'A clear five-step process that keeps you involved from the first payment through final delivery.') {
+      paragraph.remove();
+    }
   });
 });
