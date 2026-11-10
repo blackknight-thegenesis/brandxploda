@@ -6,25 +6,23 @@ if (heroPreview) {
 }
 
 window.BRANDXPLODA_CONFIG = {
- 
-portfolio: [
-  {
-    title: "Bunnybread Kota Websites",
-    category: "Live website showcase",
-    url: "bunnybread-kota-business.vercel.app"
-  },
-  {
-    title: "Butchery Websites",
-    category: "Live website showcase",
-    url: "butchery-ecommerce.vercel.app"
-  },
-  {
-    title: "Ice Cream Business Websites",
-    category: "Live website showcase",
-    url: "icecream-business.vercel.app"
-  }
-]
-,
+  portfolio: [
+    {
+      title: "Bunnybread Kota Websites",
+      category: "Live website showcase",
+      url: "https://bunnybread-kota-business.vercel.app"
+    },
+    {
+      title: "Butchery Websites",
+      category: "Live website showcase",
+      url: "https://butchery-ecommerce.vercel.app"
+    },
+    {
+      title: "Ice Cream Business Websites",
+      category: "Live website showcase",
+      url: "https://icecream-business.vercel.app"
+    }
+  ],
   contactEmail: 'brandxploda.hello@gmail.com', // Set your real business email to enable the email enquiry action.
   whatsappNumber: '' // Optional: international digits only, e.g. 27XXXXXXXXX.
 };
