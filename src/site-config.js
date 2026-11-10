@@ -1,7 +1,9 @@
 /* BrandXploda configuration. Paste your three Vercel URLs below. */
-const heroPreviewStyles = document.createElement('style');
-heroPreviewStyles.textContent = '.hero-visual{display:none!important}.hero-grid{grid-template-columns:1fr!important}';
-document.head.append(heroPreviewStyles);
+const heroPreview = document.querySelector('.hero-visual img');
+if (heroPreview) {
+  heroPreview.src = 'assets/growing-business-hero-logo.gif';
+  heroPreview.alt = 'BrandXploda growing business logo';
+}
 
 window.BRANDXPLODA_CONFIG = {
   portfolio: [
