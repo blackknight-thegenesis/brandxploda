@@ -31,13 +31,12 @@ layoutStyles.textContent = `
   #services #capabilityGrid { margin-inline: auto; }
   #services #featuredServices > *,
   #services #capabilityGrid > * { min-width: 0; height: 100%; }
-  /* Put category filters on their own row, below the featured service cards. */
   #services .catalog-header {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 18px;
-    margin-top: 40px;
+    margin: 40px 0 32px;
   }
   #services .catalog-header .filters {
     display: flex;
@@ -45,8 +44,8 @@ layoutStyles.textContent = `
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 0;
-    padding-top: 16px;
+    margin: 0 0 16px;
+    padding: 16px 0 8px;
     border-top: 1px solid var(--line);
   }
   #portfolioGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); justify-content: center; width: 100%; }
@@ -57,13 +56,12 @@ layoutStyles.textContent = `
   #portfolioGrid .preview iframe::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
   @media (max-width: 760px) {
     #portfolioGrid { grid-template-columns: 1fr; }
-    #services .catalog-header .filters { gap: 8px; }
+    #services .catalog-header .filters { gap: 8px; margin-bottom: 20px; }
   }
 `;
 document.head.appendChild(layoutStyles);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Put the services content in one shell, in the intended visual and reading order.
   const services = document.getElementById('services');
   const shell = services?.querySelector('.shell');
   const heading = services?.querySelector('.section-heading');
