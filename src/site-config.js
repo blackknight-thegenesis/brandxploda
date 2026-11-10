@@ -80,4 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
       paragraph.remove();
     }
   });
+
+  // Keep the services heading, intro, featured cards, catalogue controls, and icons in one aligned column.
+  const services = document.getElementById('services');
+  const servicesShell = services?.querySelector(':scope > .shell');
+  const servicesHeading = servicesShell?.querySelector('.section-heading');
+  const intro = servicesShell?.querySelector(':scope > p');
+  const featured = document.getElementById('featuredServices');
+  const catalogHeader = servicesShell?.querySelector('.catalog-header');
+  const capabilities = servicesShell?.querySelector('#capabilityGrid');
+  const catalogFooter = servicesShell?.querySelector('.catalog-footer');
+  if (services && servicesShell && servicesHeading && intro && featured && catalogHeader && capabilities && catalogFooter) {
+    services.append(servicesShell);
+    servicesShell.append(servicesHeading, intro, featured, catalogHeader, capabilities, catalogFooter);
+  }
 });
