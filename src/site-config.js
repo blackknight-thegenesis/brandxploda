@@ -1,5 +1,5 @@
 /* BrandXploda configuration. Update the three project URLs and names below. */
-const heroImage = document.querySelector('.hero-visual img');
+const heroImage = document.querySelector('.hero-visual img, .hero-visual picture img');
 if (heroImage) {
   heroImage.src = 'assets/growing-business-hero-logo.gif';
   heroImage.alt = 'BrandXploda growing business logo';
@@ -27,7 +27,25 @@ window.BRANDXPLODA_CONFIG = {
   whatsappNumber: ''
 };
 
-// Open projects separately and suppress embedded-page scrollbars in the gallery.
+const previewStyles = document.createElement('style');
+previewStyles.textContent = `
+  #portfolioGrid iframe,
+  #portfolioGrid .preview,
+  #portfolioGrid .preview-frame {
+    overflow: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  #portfolioGrid iframe::-webkit-scrollbar,
+  #portfolioGrid .preview::-webkit-scrollbar,
+  #portfolioGrid .preview-frame::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+  }
+`;
+document.head.appendChild(previewStyles);
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#portfolioGrid a[href^="https://"]').forEach(link => {
     link.target = '_blank';
@@ -37,5 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#portfolioGrid iframe').forEach(frame => {
     frame.setAttribute('scrolling', 'no');
     frame.style.overflow = 'hidden';
+    frame.style.border = '0';
   });
 });
