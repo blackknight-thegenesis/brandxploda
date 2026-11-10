@@ -31,13 +31,34 @@ layoutStyles.textContent = `
   #services #capabilityGrid { margin-inline: auto; }
   #services #featuredServices > *,
   #services #capabilityGrid > * { min-width: 0; height: 100%; }
+  /* Put category filters on their own row, below the featured service cards. */
+  #services .catalog-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 40px;
+  }
+  #services .catalog-header .filters {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
   #portfolioGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); justify-content: center; width: 100%; }
   #portfolioGrid > .portfolio-card { width: 100%; min-width: 0; }
   #portfolioGrid .preview { width: 100%; overflow: hidden !important; scrollbar-width: none !important; -ms-overflow-style: none !important; }
   #portfolioGrid .preview iframe { left: 50%; transform: translateX(-50%) scale(.25); transform-origin: top center; overflow: hidden !important; border: 0; }
   #portfolioGrid .preview::-webkit-scrollbar,
   #portfolioGrid .preview iframe::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
-  @media (max-width: 760px) { #portfolioGrid { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) {
+    #portfolioGrid { grid-template-columns: 1fr; }
+    #services .catalog-header .filters { gap: 8px; }
+  }
 `;
 document.head.appendChild(layoutStyles);
 
