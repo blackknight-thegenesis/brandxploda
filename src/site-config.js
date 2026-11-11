@@ -65,7 +65,11 @@ const accentStyles = document.createElement('style');
 accentStyles.textContent = `
   .brand-icon {
     color: var(--text);
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
   }
   .brand-icon > span,
   .brand-icon .star,
