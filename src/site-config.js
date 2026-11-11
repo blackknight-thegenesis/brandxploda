@@ -93,3 +93,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Keep the X as the sole accent in the wordmark and remove decorative stars from X icons.
+document.querySelectorAll('.brand-icon').forEach(icon => {
+  icon.textContent = 'X';
+});
+document.querySelectorAll('.brand strong').forEach(wordmark => {
+  const accentX = document.createElement('span');
+  accentX.textContent = 'X';
+  wordmark.replaceChildren(document.createTextNode('BRAND'), accentX, document.createTextNode('PLODA'));
+});
+
+// Match the word EXPLODE in the tagline to the hero's BUSINESS accent styling.
+const businessAccent = document.querySelector('.hero-copy h1 > span:not(.period)');
+const businessAccentStyle = businessAccent && getComputedStyle(businessAccent);
+document.querySelectorAll('.brand small').forEach(tagline => {
+  const text = tagline.textContent.trim();
+  if (!text.startsWith('EXPLODE ')) return;
+
+  const highlight = document.createElement('span');
+  highlight.textContent = 'EXPLODE';
+  tagline.replaceChildren(highlight, document.createTextNode(text.slice('EXPLODE'.length)));
+
+  if (businessAccentStyle) {
+    highlight.style.color = businessAccentStyle.color;
+    highlight.style.backgroundImage = businessAccentStyle.backgroundImage;
+    highlight.style.backgroundClip = businessAccentStyle.backgroundClip;
+    highlight.style.webkitBackgroundClip = businessAccentStyle.webkitBackgroundClip;
+    highlight.style.webkitTextFillColor = businessAccentStyle.webkitTextFillColor;
+  }
+});
