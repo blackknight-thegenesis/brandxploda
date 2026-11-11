@@ -61,6 +61,35 @@ layoutStyles.textContent = `
 `;
 document.head.appendChild(layoutStyles);
 
+const accentStyles = document.createElement('style');
+accentStyles.textContent = `
+  .brand-icon {
+    color: var(--text);
+  }
+  .brand-icon > span,
+  .brand-icon .star,
+  .brand-icon span:last-child {
+    display: none !important;
+  }
+  .brand strong .brand-wordmark-accent,
+  .hero-copy h1 > span:not(.period),
+  .brand small .brand-tagline-accent {
+    color: var(--orange);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .brand strong .brand-wordmark-accent {
+    display: inline-block;
+    margin-inline: 0.02em;
+  }
+  .brand small .brand-tagline-accent {
+    font-weight: 700;
+  }
+`;
+document.head.appendChild(accentStyles);
+
 document.addEventListener('DOMContentLoaded', () => {
   const services = document.getElementById('services');
   const shell = services?.querySelector('.shell');
@@ -92,34 +121,27 @@ document.addEventListener('DOMContentLoaded', () => {
       paragraph.remove();
     }
   });
-});
 
-// Keep the X as the sole accent in the wordmark and remove decorative stars from X icons.
-document.querySelectorAll('.brand-icon').forEach(icon => {
-  icon.textContent = 'X';
-});
-document.querySelectorAll('.brand strong').forEach(wordmark => {
-  const accentX = document.createElement('span');
-  accentX.textContent = 'X';
-  wordmark.replaceChildren(document.createTextNode('BRAND'), accentX, document.createTextNode('PLODA'));
-});
+  document.querySelectorAll('.brand-icon').forEach(icon => {
+    const star = icon.querySelector('span');
+    if (star) star.remove();
+    if (!icon.textContent.trim() || icon.textContent.trim() === 'X') {
+      icon.textContent = 'X';
+    }
+  });
 
-// Match the word EXPLODE in the tagline to the hero's BUSINESS accent styling.
-const businessAccent = document.querySelector('.hero-copy h1 > span:not(.period)');
-const businessAccentStyle = businessAccent && getComputedStyle(businessAccent);
-document.querySelectorAll('.brand small').forEach(tagline => {
-  const text = tagline.textContent.trim();
-  if (!text.startsWith('EXPLODE ')) return;
+  document.querySelectorAll('.brand strong').forEach(strong => {
+    const raw = strong.textContent.replace(/\s+/g, '');
+    if (raw.includes('BRANDXPLODA')) {
+      strong.innerHTML = 'BRAND<span class="brand-wordmark-accent">X</span>PLODA';
+    }
+  });
 
-  const highlight = document.createElement('span');
-  highlight.textContent = 'EXPLODE';
-  tagline.replaceChildren(highlight, document.createTextNode(text.slice('EXPLODE'.length)));
-
-  if (businessAccentStyle) {
-    highlight.style.color = businessAccentStyle.color;
-    highlight.style.backgroundImage = businessAccentStyle.backgroundImage;
-    highlight.style.backgroundClip = businessAccentStyle.backgroundClip;
-    highlight.style.webkitBackgroundClip = businessAccentStyle.webkitBackgroundClip;
-    highlight.style.webkitTextFillColor = businessAccentStyle.webkitTextFillColor;
-  }
+  document.querySelectorAll('.brand small').forEach(small => {
+    const text = small.textContent.trim();
+    const match = text.match(/^EXPLODE\s+(.*)$/i);
+    if (match) {
+      small.innerHTML = '<span class="brand-tagline-accent">EXPLODE</span> ' + match[1];
+    }
+  });
 });
