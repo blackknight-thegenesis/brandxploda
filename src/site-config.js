@@ -65,6 +65,7 @@ const accentStyles = document.createElement('style');
 accentStyles.textContent = `
   .brand-icon {
     color: var(--text);
+    display: inline-block;
   }
   .brand-icon > span,
   .brand-icon .star,
@@ -72,9 +73,9 @@ accentStyles.textContent = `
     display: none !important;
   }
   .brand strong .brand-wordmark-accent,
+  .hero-copy h1 .brand-tagline-accent,
   .hero-copy h1 > span:not(.period),
-  .brand small .brand-tagline-accent,
-  .hero-copy h1 .brand-tagline-accent {
+  .brand small .brand-tagline-accent {
     color: var(--orange);
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -85,8 +86,8 @@ accentStyles.textContent = `
     display: inline-block;
     margin-inline: 0.02em;
   }
-  .brand small .brand-tagline-accent,
-  .hero-copy h1 .brand-tagline-accent {
+  .hero-copy h1 .brand-tagline-accent,
+  .brand small .brand-tagline-accent {
     font-weight: 700;
   }
 `;
@@ -125,33 +126,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelectorAll('.brand-icon').forEach(icon => {
-    const star = icon.querySelector('span');
-    if (star) star.remove();
-    if (!icon.textContent.trim() || icon.textContent.trim() === 'X') {
-      icon.textContent = 'X';
-    }
+    icon.innerHTML = 'X';
   });
 
   document.querySelectorAll('.brand strong').forEach(strong => {
-    const raw = strong.textContent.replace(/\s+/g, '');
-    if (raw.includes('BRANDXPLODA')) {
+    const text = strong.textContent.replace(/\s+/g, '');
+    if (text.includes('BRANDXPLODA')) {
       strong.innerHTML = 'BRAND<span class="brand-wordmark-accent">X</span>PLODA';
-    }
-  });
-
-  document.querySelectorAll('.brand small').forEach(small => {
-    const text = small.textContent.trim();
-    const match = text.match(/^GROW\s+YOUR\s+BUSINESS\s+ONLINE\.?$/i);
-    if (match) {
-      small.innerHTML = '<span class="brand-tagline-accent">EXPLODE</span> YOUR BUSINESS ONLINE.';
     }
   });
 
   const heroHeading = document.querySelector('.hero-copy h1');
   if (heroHeading) {
-    const heroText = heroHeading.textContent.trim();
-    if (!/EXPLODE/i.test(heroText)) {
-      heroHeading.innerHTML = 'EXPLODE YOUR <span>BUSINESS</span> ONLINE<span class="period">.</span>';
-    }
+    heroHeading.innerHTML = '<span class="brand-tagline-accent">EXPLODE</span> YOUR <span>BUSINESS</span> ONLINE<span class="period">.</span>';
   }
+
+  document.querySelectorAll('.brand small').forEach(small => {
+    const text = small.textContent.trim();
+    if (/^(GROW|EXPLODE)/i.test(text)) {
+      small.innerHTML = '<span class="brand-tagline-accent">EXPLODE</span> YOUR BUSINESS ONLINE.';
+    }
+  });
 });
