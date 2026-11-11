@@ -73,7 +73,8 @@ accentStyles.textContent = `
   }
   .brand strong .brand-wordmark-accent,
   .hero-copy h1 > span:not(.period),
-  .brand small .brand-tagline-accent {
+  .brand small .brand-tagline-accent,
+  .hero-copy h1 .brand-tagline-accent {
     color: var(--orange);
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -84,7 +85,8 @@ accentStyles.textContent = `
     display: inline-block;
     margin-inline: 0.02em;
   }
-  .brand small .brand-tagline-accent {
+  .brand small .brand-tagline-accent,
+  .hero-copy h1 .brand-tagline-accent {
     font-weight: 700;
   }
 `;
@@ -139,9 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.brand small').forEach(small => {
     const text = small.textContent.trim();
-    const match = text.match(/^EXPLODE\s+(.*)$/i);
+    const match = text.match(/^GROW\s+YOUR\s+BUSINESS\s+ONLINE\.?$/i);
     if (match) {
-      small.innerHTML = '<span class="brand-tagline-accent">EXPLODE</span> ' + match[1];
+      small.innerHTML = '<span class="brand-tagline-accent">EXPLODE</span> YOUR BUSINESS ONLINE.';
     }
   });
+
+  const heroHeading = document.querySelector('.hero-copy h1');
+  if (heroHeading) {
+    const heroText = heroHeading.textContent.trim();
+    if (!/EXPLODE/i.test(heroText)) {
+      heroHeading.innerHTML = 'EXPLODE YOUR <span>BUSINESS</span> ONLINE<span class="period">.</span>';
+    }
+  }
 });
