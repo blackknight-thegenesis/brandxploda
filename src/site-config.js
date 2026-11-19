@@ -9,7 +9,10 @@ window.BRANDXPLODA_CONFIG = {
   portfolio: [
     { title: 'Bunnybread Kota', category: 'Live website showcase', url: 'https://bunnybread-kota-business.vercel.app' },
     { title: 'Butchery E-commerce', category: 'Live website showcase', url: 'https://butchery-ecommerce.vercel.app' },
-    { title: 'Ice Cream Business', category: 'Live website showcase', url: 'https://icecream-business.vercel.app' }
+    { title: 'Ice Cream Business', category: 'Live website showcase', url: 'https://icecream-business.vercel.app' } ,
+        { title: 'Hair , Wigs and Extensions', category: 'Live website showcase', url: 'https://crown-and-glory.vercel.app' }
+
+
   ],
   contactEmail: 'brandxploda.hello@gmail.com',
   whatsappNumber: ''
