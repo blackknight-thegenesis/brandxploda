@@ -16,7 +16,7 @@ const moreBtn=document.getElementById('showMore');
 function renderServices(){filterNode.innerHTML=categories.map(cat=>`<button class="filter" type="button" data-filter="${cat}" aria-pressed="${cat===activeCategory}">${cat}</button>`).join('');const matches=serviceNames.map((name,i)=>({name,i})).filter(s=>activeCategory==='All'||categoryFor(s.i)===activeCategory);const visible=showAll?matches:matches.slice(0,10);gridNode.innerHTML=visible.map(s=>`<div class="capability"><img src="${encodeURI(iconFor(s.i))}" alt="" loading="lazy"><strong>${escapeHtml(s.name)}</strong></div>`).join('');moreBtn.hidden=matches.length<=10;moreBtn.textContent=showAll?'Show Fewer Services ↑':`Show All ${matches.length} Services ↓`}
 filterNode.addEventListener('click',e=>{const btn=e.target.closest('[data-filter]');if(!btn)return;activeCategory=btn.dataset.filter;showAll=false;renderServices()});moreBtn.addEventListener('click',()=>{showAll=!showAll;renderServices()});renderServices();
 const cfg=window.BRANDXPLODA_CONFIG||{};
-const portfolio=(Array.isArray(cfg.portfolio)?cfg.portfolio:[]).slice(0,3);
+const portfolio=Array.isArray(cfg.portfolio)?cfg.portfolio:[];
 while(portfolio.length<3)portfolio.push({title:`Website Project 0${portfolio.length+1}`,category:'Live website showcase',url:''});
 function safeVercelUrl(raw){try{const u=new URL(String(raw).trim());return u.protocol==='https:'&&(/(^|\.)vercel\.app$/i).test(u.hostname)&&!u.username&&!u.password?u.href:null}catch{return null}}
 const portfolioNode=document.getElementById('portfolioGrid');
